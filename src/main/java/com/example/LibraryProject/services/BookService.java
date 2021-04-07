@@ -37,5 +37,6 @@ public class BookService {
 	private void updateDate(Book entity, Book obj) {
 		entity.setName(obj.getName());
 		entity.setPhoto(obj.getPhoto());
+		entity.setEditora(obj.getEditora());
 	}
 }

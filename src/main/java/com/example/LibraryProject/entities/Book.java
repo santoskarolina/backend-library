@@ -87,7 +87,10 @@ public class Book implements Serializable{
 	public Editora getEditora() {
 		return editora;
 	}
-
+	
+	public void setEditora(Editora editora) {
+		this.editora = editora;
+	}
 	public Set<Categoria> getCategorias() {
 		return categorias;
 	}
