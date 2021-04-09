@@ -26,30 +26,33 @@ public class Book implements Serializable{
 	private String name;
 	private String photo;
 	
+	
 	@ManyToMany
 	@JoinTable(name = "td_book_escritores", 
 	joinColumns = @JoinColumn(name="book_id"),
 	inverseJoinColumns = @JoinColumn(name="escritores_id"))
 	private Set<Escritores> escritores = new HashSet<>();
 	
+	
 	@ManyToOne
-	@JoinColumn(name="editora_id")
+	@JoinColumn(name = "editora_id")
 	private Editora editora;
 	
-	@ManyToMany
-	@JoinTable(name = "td_book_category", 
-	joinColumns = @JoinColumn(name="book_id"),
-	inverseJoinColumns = @JoinColumn(name="category_id"))
-	private Set<Categoria> categorias = new HashSet<>();
+	
+	@ManyToOne
+	@JoinColumn(name = "categoria_id")
+	private Categoria categoria;
 	
 	public Book() {
 	}
-	public Book(Long id, String name, String photo, Editora editora) {
+	
+	public Book(Long id, String name, String photo, Editora editora, Categoria categoria) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.photo = photo;
 		this.editora = editora;
+		this.categoria = categoria;
 	}
 
 	public Long getId() {
@@ -91,10 +94,15 @@ public class Book implements Serializable{
 	public void setEditora(Editora editora) {
 		this.editora = editora;
 	}
-	public Set<Categoria> getCategorias() {
-		return categorias;
+	
+	public Categoria getCategorias() {
+		return categoria;
 	}
-
+	
+	
+	public void setCategorias(Categoria categoria) {
+		this.categoria = categoria;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

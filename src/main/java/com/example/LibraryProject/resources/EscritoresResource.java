@@ -1,6 +1,7 @@
 package com.example.LibraryProject.resources;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.LibraryProject.dto.EscritoresDTO;
 import com.example.LibraryProject.entities.Escritores;
 import com.example.LibraryProject.services.EscritoresService;
 
@@ -20,9 +22,10 @@ public class EscritoresResource {
 	private EscritoresService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Escritores>> findAll(){
+	public ResponseEntity<List<EscritoresDTO>> findAll(){
 		List<Escritores> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+		List<EscritoresDTO> listDTO = list.stream().map(x -> new EscritoresDTO(x)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	@GetMapping(value="/{id}")

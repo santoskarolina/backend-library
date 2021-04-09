@@ -1,8 +1,8 @@
 package com.example.LibraryProject.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,10 +24,9 @@ public class Editora implements Serializable{
 	private Long id;
 	private String name;
 
-	
 	@JsonIgnore
 	@OneToMany(mappedBy = "editora")
-	private List<Book> books = new ArrayList<>();
+	private Set<Book> books = new HashSet<>();
 	
 	public Editora() {
 	}
@@ -54,7 +53,7 @@ public class Editora implements Serializable{
 		this.name = name;
 	}
 	
-	public List<Book> getBooks() {
+	public Set<Book> getBooks() {
 		return books;
 	}
 

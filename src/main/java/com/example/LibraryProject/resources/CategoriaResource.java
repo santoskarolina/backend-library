@@ -2,6 +2,7 @@ package com.example.LibraryProject.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.LibraryProject.dto.CategoriasDTO;
 import com.example.LibraryProject.entities.Categoria;
 import com.example.LibraryProject.services.CategoriaService;
 
@@ -25,9 +27,10 @@ public class CategoriaResource {
 	private CategoriaService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Categoria>> findAll(){
+	public ResponseEntity<List<CategoriasDTO>> findAll(){
 		List<Categoria> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+		List<CategoriasDTO> listDTO = list.stream().map(x -> new CategoriasDTO(x)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	@GetMapping(value="/{id}")

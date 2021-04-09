@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,7 +25,7 @@ public class Categoria implements Serializable{
 	private String name;
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy = "categorias")
+	@OneToMany(mappedBy = "categoria")
 	private Set<Book> books = new HashSet<>();
 	
 	public Categoria() {
