@@ -25,7 +25,7 @@
 
 
 #### :small_blue_diamond: UML - Modelo de domínio
-![UML](https://github.com/anna104016/backend-library/blob/main/domain.png)
+![UML](https://github.com/anna104016/backend-library/blob/main/uml%20livros.png)
 
 #### :small_blue_diamond: Modelo de camadas
-![DOMAIN MODEL](https://github.com/anna104016/backend-library/blob/main/uml%20livros.png)
+![DOMAIN MODEL](https://github.com/anna104016/backend-library/blob/main/domain.png)
