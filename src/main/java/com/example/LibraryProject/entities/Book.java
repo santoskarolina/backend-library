@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="tb_books")
 public class Book implements Serializable{
@@ -25,6 +27,8 @@ public class Book implements Serializable{
 	private Long id;
 	private String name;
 	private String photo;
+	private String descricao;
+	private String editora;
 	
 	
 	@ManyToMany
@@ -33,12 +37,7 @@ public class Book implements Serializable{
 	inverseJoinColumns = @JoinColumn(name="escritores_id"))
 	private Set<Escritores> escritores = new HashSet<>();
 	
-	
-	@ManyToOne
-	@JoinColumn(name = "editora_id")
-	private Editora editora;
-	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
@@ -46,11 +45,12 @@ public class Book implements Serializable{
 	public Book() {
 	}
 	
-	public Book(Long id, String name, String photo, Editora editora, Categoria categoria) {
+	public Book(Long id, String name, String photo,String descricao,String editora, Categoria categoria) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.photo = photo;
+		this.descricao = descricao;
 		this.editora = editora;
 		this.categoria = categoria;
 	}
@@ -86,19 +86,25 @@ public class Book implements Serializable{
 	public void setEscritores(Set<Escritores> escritores) {
 		this.escritores = escritores;
 	}
+	public String getDescricao() {
+		return descricao;
+	}
 
-	public Editora getEditora() {
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getEditora() {
 		return editora;
 	}
 	
-	public void setEditora(Editora editora) {
+	public void setEditora(String editora) {
 		this.editora = editora;
 	}
 	
 	public Categoria getCategorias() {
 		return categoria;
 	}
-	
 	
 	public void setCategorias(Categoria categoria) {
 		this.categoria = categoria;

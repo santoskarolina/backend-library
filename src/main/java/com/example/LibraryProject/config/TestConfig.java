@@ -9,11 +9,9 @@ import org.springframework.context.annotation.Profile;
 
 import com.example.LibraryProject.entities.Book;
 import com.example.LibraryProject.entities.Categoria;
-import com.example.LibraryProject.entities.Editora;
 import com.example.LibraryProject.entities.Escritores;
 import com.example.LibraryProject.repositories.BookRepository;
 import com.example.LibraryProject.repositories.CategoriaRepository;
-import com.example.LibraryProject.repositories.EditoraRepository;
 import com.example.LibraryProject.repositories.EscritoresRepository;
 
 @Configuration
@@ -25,10 +23,7 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private EscritoresRepository escritoresRepository;
-	
-	@Autowired
-	private EditoraRepository editoraRepository;
-	
+
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
@@ -37,7 +32,6 @@ public class TestConfig implements CommandLineRunner{
 		
 		escritoresRepository.deleteAll();
 		bookRepository.deleteAll();
-		editoraRepository.deleteAll();
 		categoriaRepository.deleteAll();
 		
 		Escritores e1 = new Escritores(null, "JK Rowling");
@@ -45,21 +39,16 @@ public class TestConfig implements CommandLineRunner{
 		Escritores e3 = new Escritores(null, "Ruy Barbosa");
 		escritoresRepository .saveAll(Arrays.asList(e1,e2,e3));
 		
-		Editora ed1 = new Editora(null, "Arqueiro");
-		Editora ed2 = new Editora(null, "Rocco");
-		Editora ed3 = new Editora(null, "Intrínseca");
-		editoraRepository.saveAll(Arrays.asList(ed1,ed2,ed3));
-		
 		Categoria c1 = new Categoria(null, "Romance");
 		Categoria c2 = new Categoria(null, "Ação");
 		Categoria c3 = new Categoria(null, "Cientifico");
 		Categoria c4 = new Categoria(null, "Drama");
 		categoriaRepository.saveAll(Arrays.asList(c1,c2,c3,c4));
 		
-		Book b1 = new Book(null, "Wonder", "photo1", ed1, c1);
-		Book b2 = new Book(null, "Harry Potter 2", "photo1", ed1, c1);
-		Book b3 = new Book(null, "Bible", "photo1", ed1, c2);
-		Book b4 = new Book(null, "New Book", "photo3",ed2, c3);
+		Book b1 = new Book(null, "Wonder", "photo1", "Lorem lorem", "Rocco", c1);
+		Book b2 = new Book(null, "Harry Potter 2", "photo1", "Lorem lorem", "Rocco", c1);
+		Book b3 = new Book(null, "Bible", "photo1", "Lorem lorem", "Rocco", c2);
+		Book b4 = new Book(null, "New Book", "photo3","Lorem lorem", "Rocco", c3);
 		bookRepository.saveAll(Arrays.asList(b1,b2,b3,b4));
 		
 		b1.getEscritores().add(e1);

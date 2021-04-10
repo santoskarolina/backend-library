@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name="tb_escritores")
 public class Escritores implements Serializable{
@@ -24,7 +22,6 @@ public class Escritores implements Serializable{
 	private Long id;
 	private String name;
 	
-	@JsonIgnore
 	@ManyToMany(mappedBy = "escritores")
 	private Set<Book> books = new HashSet<>();
 	
