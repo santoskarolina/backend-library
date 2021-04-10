@@ -7,12 +7,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.example.LibraryProject.dto.CategoriasDTO;
 import com.example.LibraryProject.entities.Book;
 import com.example.LibraryProject.entities.Categoria;
-import com.example.LibraryProject.entities.Escritores;
 import com.example.LibraryProject.repositories.BookRepository;
 import com.example.LibraryProject.repositories.CategoriaRepository;
-import com.example.LibraryProject.repositories.EscritoresRepository;
 
 @Configuration
 @Profile("test")
@@ -20,9 +19,6 @@ public class TestConfig implements CommandLineRunner{
 
 	@Autowired
 	private BookRepository bookRepository;
-	
-	@Autowired
-	private EscritoresRepository escritoresRepository;
 
 	@Autowired
 	private CategoriaRepository categoriaRepository;
@@ -30,14 +26,8 @@ public class TestConfig implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		escritoresRepository.deleteAll();
 		bookRepository.deleteAll();
 		categoriaRepository.deleteAll();
-		
-		Escritores e1 = new Escritores(null, "JK Rowling");
-		Escritores e2 = new Escritores(null, "R. J. Palacio");
-		Escritores e3 = new Escritores(null, "Ruy Barbosa");
-		escritoresRepository .saveAll(Arrays.asList(e1,e2,e3));
 		
 		Categoria c1 = new Categoria(null, "Romance");
 		Categoria c2 = new Categoria(null, "Ação");
@@ -45,22 +35,18 @@ public class TestConfig implements CommandLineRunner{
 		Categoria c4 = new Categoria(null, "Drama");
 		categoriaRepository.saveAll(Arrays.asList(c1,c2,c3,c4));
 		
-		Book b1 = new Book(null, "Wonder", "photo1", "Lorem lorem", "Rocco", c1);
-		Book b2 = new Book(null, "Harry Potter 2", "photo1", "Lorem lorem", "Rocco", c1);
-		Book b3 = new Book(null, "Bible", "photo1", "Lorem lorem", "Rocco", c2);
-		Book b4 = new Book(null, "New Book", "photo3","Lorem lorem", "Rocco", c3);
-		bookRepository.saveAll(Arrays.asList(b1,b2,b3,b4));
-		
-		b1.getEscritores().add(e1);
-		b2.getEscritores().add(e2);
-		b2.getEscritores().add(e3);
-		b3.getEscritores().add(e2);
-		b4.getEscritores().add(e3);
-		bookRepository.saveAll(Arrays.asList(b1,b2,b2,b3,b4));
-		
-		c1.getBooks().add(b1);
-		c2.getBooks().add(b3);
-		c3.getBooks().add(b4);
-		categoriaRepository.saveAll(Arrays.asList(c1,c2,c3));
+		Book b1 = new Book(null, "Wonder", "photo1", "Lorem lorem", "Rocco","John Bill" ,new CategoriasDTO(c1) );
+		Book b2 = new Book(null, "Harry Potter 2", "photo1", "Lorem lorem", "Rocco", "Ruy Barsosa",new CategoriasDTO(c1));
+		Book b3 = new Book(null, "Bible", "photo3", "Lorem lorem", "Rocco", "Justin Jason",new CategoriasDTO(c2));
+		Book b4 = new Book(null, "New Book", "photo4","Lorem lorem", "Rocco","Anne jason", new CategoriasDTO(c3));
+		Book b5 = new Book(null, "New Book2", "photo5","Lorem lorem", "Rocco", "Richard Green",new CategoriasDTO(c4));
+		bookRepository.saveAll(Arrays.asList(b1,b2,b3,b4,b5));
+	
+		c1.getLivros().add(b1);
+		c1.getLivros().add(b5);
+		c2.getLivros().add(b2);
+		c3.getLivros().add(b3);
+		c4.getLivros().add(b4);
+		categoriaRepository.saveAll(Arrays.asList(c1,c2,c3,c4));
 	}	
 }

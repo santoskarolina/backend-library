@@ -13,7 +13,6 @@ public class BooksDTO implements Serializable{
 	private String photo;
 	
 	public BooksDTO() {
-		
 	}
 
 	public BooksDTO(Book obj) {
@@ -44,5 +43,5 @@ public class BooksDTO implements Serializable{
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
-	}	
+	}		
 }

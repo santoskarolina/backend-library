@@ -38,6 +38,12 @@ public class CategoriaResource {
 		Categoria obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
+	/*
+	@GetMapping(value="/{id}/books")
+	public ResponseEntity<List<Book>> findAllBooks(@PathVariable Long id){
+		Categoria obj = service.findById(id);
+		return ResponseEntity.ok().body(obj.getLivros());
+	}*/
 	
 	@PostMapping
 	public ResponseEntity<Categoria> insert(@RequestBody Categoria obj){
