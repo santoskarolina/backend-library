@@ -1,8 +1,8 @@
 package com.example.LibraryProject.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +23,7 @@ public class Escritores implements Serializable{
 	private String name;
 	
 	@ManyToMany(mappedBy = "escritores")
-	private Set<Book> books = new HashSet<>();
+	private List<Book> books = new ArrayList<>();
 	
 	public Escritores() {
 	}
@@ -50,8 +50,12 @@ public class Escritores implements Serializable{
 		this.name = name;
 	}
 	
-	public Set<Book> getBooks() {
+	public List<Book> getBooks() {
 		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
 	}
 
 	@Override

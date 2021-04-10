@@ -1,8 +1,8 @@
 package com.example.LibraryProject.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,13 +30,13 @@ public class Book implements Serializable{
 	private String descricao;
 	private String editora;
 	
-	
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "td_book_escritores", 
 	joinColumns = @JoinColumn(name="book_id"),
 	inverseJoinColumns = @JoinColumn(name="escritores_id"))
-	private Set<Escritores> escritores = new HashSet<>();
-	
+	private List<Escritores> escritores = new ArrayList<>();
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
@@ -78,12 +78,12 @@ public class Book implements Serializable{
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-
-	public Set<Escritores> getEscritores() {
+	
+	public List<Escritores> getEscritores() {
 		return escritores;
 	}
 	
-	public void setEscritores(Set<Escritores> escritores) {
+	public void setEscritores(List<Escritores> escritores) {
 		this.escritores = escritores;
 	}
 	public String getDescricao() {
@@ -105,7 +105,7 @@ public class Book implements Serializable{
 	public Categoria getCategorias() {
 		return categoria;
 	}
-	
+
 	public void setCategorias(Categoria categoria) {
 		this.categoria = categoria;
 	}
