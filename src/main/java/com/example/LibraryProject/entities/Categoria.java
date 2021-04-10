@@ -12,20 +12,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_category")
-public class Categoria implements Serializable{
-	
+@Table(name="tb_categorias")
+public class Categoria implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String name;
-	
+
 	@OneToMany(mappedBy = "categoria")
-	private List<Book> books = new ArrayList<>();
-	
+	private List<Book> livros = new ArrayList<>();
+
 	public Categoria() {
+		super();
 	}
 
 	public Categoria(Long id, String name) {
@@ -49,12 +51,13 @@ public class Categoria implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public List<Book> getBooks() {
-		return books;
+		return livros;
 	}
-	public void setBooks(List<Book> books) {
-		this.books = books;
+
+	public void setBooks(List<Book> livros) {
+		this.livros = livros;
 	}
 
 	@Override
@@ -81,4 +84,5 @@ public class Categoria implements Serializable{
 			return false;
 		return true;
 	}
+
 }
