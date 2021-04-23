@@ -28,4 +28,4 @@
 ![UML](https://github.com/anna104016/backend-library/blob/main/uml%20livros.png)
 
 #### :small_blue_diamond: Modelo de camadas
-![DOMAIN MODEL](https://github.com/anna104016/backend-library/blob/main/domain.png)
+![DOMAIN MODEL](https://github.com/anna104016/html/blob/main/estrutura%20de%20camadas01.png)
