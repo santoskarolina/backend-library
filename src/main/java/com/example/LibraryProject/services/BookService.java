@@ -17,10 +17,6 @@ public class BookService {
 	@Autowired
 	public BookRepository respository;
 	
-	public List<Book> findAll(){
-		return respository.findAll();
-	}
-	
 	public Book findById(Long id) {
 		Optional<Book> bk = respository.findById(id);
 		return bk.orElseThrow(() -> new ResourceNotFoundException(id));
@@ -48,5 +44,9 @@ public class BookService {
 		entity.setName(obj.getName());
 		entity.setPhoto(obj.getPhoto());
 		entity.setEditora(obj.getEditora());
+	}
+	
+	public List<Book> findbyCategoria(Long categoriaId){
+		return respository.findBooks(categoriaId);
 	}
 }

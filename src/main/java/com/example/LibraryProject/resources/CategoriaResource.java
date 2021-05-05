@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.LibraryProject.dto.BooksDTO;
 import com.example.LibraryProject.dto.CategoriasDTO;
+import com.example.LibraryProject.entities.Book;
 import com.example.LibraryProject.entities.Categoria;
+import com.example.LibraryProject.services.BookService;
 import com.example.LibraryProject.services.CategoriaService;
 
 @RestController
@@ -25,6 +28,9 @@ public class CategoriaResource {
 	
 	@Autowired
 	private CategoriaService service;
+	
+	@Autowired
+	private BookService bookService;
 	
 	@GetMapping
 	public ResponseEntity<List<CategoriasDTO>> findAll(){
@@ -38,12 +44,13 @@ public class CategoriaResource {
 		Categoria obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	/*
-	@GetMapping(value="/{id}/books")
-	public ResponseEntity<List<Book>> findAllBooks(@PathVariable Long id){
-		Categoria obj = service.findById(id);
-		return ResponseEntity.ok().body(obj.getLivros());
-	}*/
+	
+	@GetMapping(value="/{categoriaId}/books")
+	public ResponseEntity<List<BooksDTO>> findAllBooks(@PathVariable Long categoriaId){
+		List<Book> list = bookService.findbyCategoria(categoriaId);
+		List<BooksDTO> listDTO = list.stream().map(x -> new BooksDTO(x)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
+	}
 	
 	@PostMapping
 	public ResponseEntity<Categoria> insert(@RequestBody Categoria obj){

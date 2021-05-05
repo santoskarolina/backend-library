@@ -1,8 +1,6 @@
 package com.example.LibraryProject.resources;
 
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.LibraryProject.dto.BooksDTO;
 import com.example.LibraryProject.entities.Book;
 import com.example.LibraryProject.services.BookService;
 
@@ -27,12 +24,6 @@ public class BookResource {
 	@Autowired
 	private BookService service;
 	
-	@GetMapping
-	public ResponseEntity<List<BooksDTO>> findAll(){
-		List<Book> list = service.findAll();
-		List<BooksDTO> listDTO = list.stream().map(x -> new BooksDTO(x)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDTO);
-	}
 	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Book> findById(@PathVariable Long id){

@@ -6,9 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.example.LibraryProject.dto.CategoriasDTO;
 
 @Entity
 @Table(name="tb_books")
@@ -25,12 +25,14 @@ public class Book implements Serializable{
 	private String editora;
 	private String escritor;
 
-	private CategoriasDTO categoria;
+	@ManyToOne
+	@JoinColumn(name="categoria_id")
+	private Categoria categoria;
 	
 	public Book() {
 	}
 	
-	public Book(Long id, String name, String photo,String descricao,String editora,String escritor, CategoriasDTO categoria) {
+	public Book(Long id, String name, String photo,String descricao,String editora,String escritor, Categoria categoria) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -88,11 +90,11 @@ public class Book implements Serializable{
 		this.escritor = escritor;
 	}
 	
-	public CategoriasDTO getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(CategoriasDTO categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 	
